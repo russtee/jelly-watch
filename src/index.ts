@@ -19,7 +19,7 @@ interface JellyfinWebhookPayload {
 
 // Function to calculate aspect ratio
 function calculateAspectRatio(width: number, height: number): string {
-  if (!width || !height || height === 0) {
+  if (width == null || height == null || height === 0) {
     return 'Unknown';
   }
   
