@@ -38,7 +38,7 @@ app.post('/webhook', (req: Request, res: Response) => {
   try {
     // Jellyfin sends URL-encoded data with JSON in the 'data' field
     let payload: JellyfinWebhookPayload;
-    if (req.body.data) {
+    if (req.body.data && typeof req.body.data === 'string') {
       // Parse the JSON from the 'data' field
       payload = JSON.parse(req.body.data);
     } else {
