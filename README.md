@@ -40,6 +40,31 @@ The server will start on port 3000 by default. You can change this by setting th
 3. Enable "Playback Start" notifications
 4. When media starts playing, the aspect ratio will be logged to the console
 
+### Example Template
+```
+{
+    "Name": "{{{Name}}}",
+    "ClientName": "{{{ClientName}}}",
+    "Client": "{{Client}}",
+    "RemoteEndPoint": "{{RemoteEndPoint}}",
+    "DeviceName": "{{DeviceName}}",
+    "DeviceId": "{{DeviceId}}",
+    "Audio_0_Title": "{{Audio_0_Title}}",
+    "Audio_0_Type": "{{Audio_0_Type}}",
+    "Audio_0_Language": "{{Audio_0_Language}}",
+    "Audio_0_Codec": "{{Audio_0_Codec}}",
+    "Audio_0_Channels": "{{Audio_0_Channels}}",
+    "Audio_0_Bitrate": "{{Audio_0_Bitrate}}",
+    "Video_0_Height": "{{Video_0_Height}}",
+    "Video_0_Width": "{{Video_0_Width}}",
+    "Video_0_AspectRatio": "{{{Video_0_AspectRatio}}}",
+    "Video_0_Codec": "{{{Video_0_Codec}}}",
+    "Video_0_FrameRate": "{{{Video_0_FrameRate}}}",
+    "Video_0_PixelFormat": "{{{Video_0_PixelFormat}}}",
+    "UserId": "{{UserId}}"
+}
+```
+
 ## Example Output
 
 ```
