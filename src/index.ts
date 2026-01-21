@@ -3,8 +3,9 @@ import express, { Request, Response } from 'express';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
+// Middleware to parse JSON bodies and URL-encoded bodies
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Interface for Jellyfin webhook payload
 interface JellyfinWebhookPayload {
@@ -35,7 +36,15 @@ function calculateAspectRatio(width: number, height: number): string {
 // Webhook endpoint
 app.post('/webhook', (req: Request, res: Response) => {
   try {
-    const payload: JellyfinWebhookPayload = req.body;
+    // Jellyfin sends URL-encoded data with JSON in the 'data' field
+    let payload: JellyfinWebhookPayload;
+    if (req.body.data && typeof req.body.data === 'string') {
+      // Parse the JSON from the 'data' field
+      payload = JSON.parse(req.body.data);
+    } else {
+      // Fallback to direct body for raw JSON
+      payload = req.body;
+    }
     
     // Check if this is a playback notification
     if (payload.NotificationType === 'PlaybackStart' && payload.Item) {
