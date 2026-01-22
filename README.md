@@ -42,7 +42,11 @@ The server will start on port 3000 by default. You can change this by setting th
 
 ### Example Template
 ```
+http://russt-mm-uk.goldilocks.red:3000/webhook
+```
+```
 {
+    "NotificationType": "{{{NotificationType}}}",
     "Name": "{{{Name}}}",
     "ClientName": "{{{ClientName}}}",
     "Client": "{{Client}}",
