@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
-    "watch": "chokidar \"src/**/*.{js,ts}\" -c \"npm run lint:fix\""
+    "watch": "tsc --watch"
   },
   "keywords": [],
   "author": "",

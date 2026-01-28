@@ -4,7 +4,7 @@ export interface LensMemorySetting {
   name: string;
 }
 
-const MAX_RATIO_DIFF = 0.05;
+const MAX_RATIO_DIFF = 0.1;
 
 const LENS_MEMORY_SETTINGS: LensMemorySetting[] = [
   { aspectRatio: 1.78, memorySlot: 1, name: '16:9' },     // HD/HDTV standard
