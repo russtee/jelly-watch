@@ -1,5 +1,6 @@
 {
   "name": "jelly-watch",
+  "type": "module",
   "version": "1.0.0",
   "description": "A Jellyfin monitor",
   "main": "dist/index.js",
@@ -7,7 +8,10 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
+    "watch": "chokidar \"src/**/*.{js,ts}\" -c \"npm run lint:fix\""
   },
   "keywords": [],
   "author": "",
@@ -19,7 +23,14 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.9",
+    "puppeteer": "^24.36.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^2.8.0",
+    "chokidar-cli": "^3.0.0"
   }
 }

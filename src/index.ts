@@ -1,21 +1,14 @@
-import { EpsonProjectorClient } from './epson-control.js';
+import { EpsonLensMemorySetter } from './lens-memory.js';
 import { WebhookHandler } from './webhook.js';
 
-const PROJECTOR_IP = '192.168.1.169';
-const PROJECTOR_PORT = 80;
-const PORT = process.env.PORT || 3000;
-
 const handler = new WebhookHandler();
+const epsonLensMemorySetter = new EpsonLensMemorySetter();
 
-handler.on('playback-start', (event) => {
+
+handler.on('playback-start', async (event) => {
   console.log('Playback started event received:', {event});
-  // Add your handling logic here
+  await epsonLensMemorySetter.setLensMemory(event.lensMemorySetting.memorySlot);
 });
 
-await handler.InitAndStartServer(Number(PORT));
+await handler.InitAndStartServer();
 
-const controller = new EpsonProjectorClient(PROJECTOR_IP, PROJECTOR_PORT);
-
-//console.log(`Getting projector status from: ${PROJECTOR_IP}:${PROJECTOR_PORT}`);
-//const status = await controller.getStatus();  
-//console.log('Projector status:', status);

@@ -36,22 +36,13 @@ export interface PlaybackStartEvent  {
   lensMemorySetting: LensMemorySetting;
 }
 
-function stringToInteger(value: any, defaultValue: number = 0): number {
-  const parsed = parseInt(value, 10);
-  return isNaN(parsed) ? defaultValue : parsed;
-}
-
-function stringToFloat(value: any, defaultValue: number = 0): number {
-  const parsed = parseFloat(value);
-  return isNaN(parsed) ? defaultValue : parsed;
-}
 
 export class WebhookHandler extends EventEmitter {
   constructor() {
     super();
   }
 
-  async InitAndStartServer(port: number): Promise<void> {
+  async InitAndStartServer(): Promise<void> {
     const app = express();
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -75,16 +66,16 @@ export class WebhookHandler extends EventEmitter {
         }
       }
 
-      event.webHookPayload.Audio_0_Channels = stringToInteger(event.webHookPayload.Audio_0_Channels);
-      event.webHookPayload.Audio_0_Bitrate = stringToInteger(event.webHookPayload.Audio_0_Bitrate);
-      event.webHookPayload.Video_0_Height = stringToInteger(event.webHookPayload.Video_0_Height);
-      event.webHookPayload.Video_0_Width = stringToInteger(event.webHookPayload.Video_0_Width);
-      event.webHookPayload.Video_0_FrameRate = stringToFloat(event.webHookPayload.Video_0_FrameRate);
+      //event.webHookPayload.Audio_0_Channels = stringToInteger(event.webHookPayload.Audio_0_Channels);
+      //event.webHookPayload.Audio_0_Bitrate = stringToInteger(event.webHookPayload.Audio_0_Bitrate);
+      //event.webHookPayload.Video_0_Height = stringToInteger(event.webHookPayload.Video_0_Height);
+      //event.webHookPayload.Video_0_Width = stringToInteger(event.webHookPayload.Video_0_Width);
+      //event.webHookPayload.Video_0_FrameRate = stringToFloat(event.webHookPayload.Video_0_FrameRate);
       //
       event.aspectRatioCalc = event.webHookPayload.Video_0_Width / event.webHookPayload.Video_0_Height;
       event.lensMemorySetting = GetClosestLensMemorySetting(event.aspectRatioCalc);
 
-      console.log('Received webhook:', {payload,event});
+      //console.log('Received webhook:', {payload,event});
       this.emit('playback-start', event);
       res.status(200).json({ received: true }); 
     });
