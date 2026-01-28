@@ -1,10 +1,13 @@
 import { launch, Locator, Page } from 'puppeteer';
+import { LENS_MEMORY_SETTINGS } from './projector.js';
 
 const USERNAME = 'EPSONWEB';
 const PASSWORD = 'p5au5agep';
 const IP_ADDRESS = '192.168.1.64';
-const MIN_MEMORY_SLOT = 1;
-const MAX_MEMORY_SLOT = 2;
+
+async function SleepMs(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export class EpsonLensMemorySetter {
   private currentSlot = 0;
@@ -133,11 +136,20 @@ export class EpsonLensMemorySetter {
           },
         });
     }
+
+    console.log(`step 9 - wait 5s`);
+    await SleepMs(5000);
+
+    console.log(`EpsonLensMemorySetter: Successfully set lens memory to slot ${memorySlot}`);
   }
 
   async setLensMemory(memorySlot: number): Promise<void> {
-    if (memorySlot < MIN_MEMORY_SLOT || memorySlot > MAX_MEMORY_SLOT) {
-      throw new Error(`EpsonLensMemorySetter: Invalid memory slot: ${memorySlot}. Must be between ${MIN_MEMORY_SLOT} and ${MAX_MEMORY_SLOT}.`);
+    if (memorySlot < 1) {
+      throw new Error(`EpsonLensMemorySetter: Invalid memory slot: memorySlot=${memorySlot}`);
+    }
+
+    if (memorySlot > LENS_MEMORY_SETTINGS.length) {
+      throw new Error(`EpsonLensMemorySetter: Memory slot memorySlot=${memorySlot} is not configured in LENS_MEMORY_SETTINGS.`);
     }
 
     if (this.currentSlot === memorySlot) {
@@ -161,6 +173,7 @@ export class EpsonLensMemorySetter {
       console.error(`EpsonLensMemorySetter: Error setting lens memory to slot ${memorySlot}:`, error);
     }
 
+    console.log(`EpsonLensMemorySetter: Closing browser`);
     await browser.close();
   }
 

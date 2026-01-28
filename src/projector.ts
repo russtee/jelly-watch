@@ -4,12 +4,12 @@ export interface LensMemorySetting {
   name: string;
 }
 
-const MAX_RATIO_DIFF = 0.1;
+const MAX_RATIO_DIFF = 0.05;
 
-const LENS_MEMORY_SETTINGS: LensMemorySetting[] = [
+export const LENS_MEMORY_SETTINGS: LensMemorySetting[] = [
   { aspectRatio: 1.78, memorySlot: 1, name: '16:9' },     // HD/HDTV standard
   { aspectRatio: 2.39, memorySlot: 2, name: '2.39:1' },   // Modern cinema widescreen
-  //{ aspectRatio: 1.85, memorySlot: 3, name: '1.85:1' },   // US theatrical widescreen
+  { aspectRatio: 1.85, memorySlot: 3, name: '1.85:1' },   // US theatrical widescreen
   //{ aspectRatio: 1.33, memorySlot: 4, name: '4:3' },      // Classic TV/Academy ratio
 ];
 

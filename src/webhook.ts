@@ -51,6 +51,12 @@ export class WebhookHandler extends EventEmitter {
     app.post('/webhook', (req: Request, res: Response) => {
       const payload: JFWebhookPlaybackStartPayload = req.body;
 
+      if ('PlaybackStop' === payload.NotificationType) {
+        console.log('Received PlaybackStop webhook, ignoring.');
+        this.emit('playback-stop', payload);  
+        return res.status(200).json({ received: true });
+      }
+
       if ('PlaybackStart' !== payload.NotificationType) {
         console.warn(`Ignoring non-playback webhook: NotificationType=${payload.NotificationType}`);
         return res.status(200).json({ received: true });
